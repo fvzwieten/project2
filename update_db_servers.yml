@@ -1,0 +1,9 @@
+---
+- name: update packages to the lastest available through the repositories
+  hosts: Role_db_server
+  
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
