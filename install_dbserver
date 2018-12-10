@@ -1,29 +1,8 @@
----
-- name: install dbserver
-  hosts: Role_db_server
+# Configure and deploy database servers.
+- hosts: Role_db_server
 
-  tasks:
+  roles:
+  - db
 
-  - name: Install mariadb
-    yum:
-      name:
-        - httpd
-        - php
-        - git
-      state: present
-
-  - name: http service state
-    service:
-      name: httpd
-      state: started
-      enabled: yes
-
-  - name: open up the firewall ports
-    firewalld:
-      service: "{{ item }}"
-      permanent: yes
-      immediate: yes
-      state: enabled
-    with_items:
-      - http
-- https
+  tags:
+- db
